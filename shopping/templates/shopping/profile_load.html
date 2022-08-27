@@ -1,0 +1,64 @@
+{% extends "shopping/base.html" %}
+
+{% load static %}
+
+{% block context%}
+    
+  <div class="main-panel">
+          <div class="content-wrapper" style="text-align: right;">
+            <div class="col-12 grid-margin stretch-card" style="justify-content: right;">
+              <form style="width: 25%;">
+<!--                {% csrf_token %}-->
+                <button type="submit" class="btn btn-danger mr-2" style="width: 93%;"
+                        formaction="{% url 'shopping:delete_load' pk %}">
+                  حذف البيانات
+                </button>
+              </form>
+              <form style="width: 25%;">
+                <button type="submit" class="btn btn-success mr-2" style="width: 93%;"
+                        formaction="{% url 'shopping:edit_load' pk %}">
+                  تعديل البيانات
+                </button>
+              </form>
+            </div>
+            <div class="row">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card" style="background-color: #191c24;">
+                  <div class="card-body">
+                    <h4 class="card-title">بيانات العربة رقم {{ data.number_of_car }}</h4>
+                    <form class="forms-sample">
+                      <div class="form-group">
+                        <label>تاريخ الدخول</label>
+                        <p>{{ data.date_of_get_in|date:"Y/m/d" }}</p>
+                      </div>
+                      <div class="form-group">
+                        <label>تاريخ الخروج</label>
+                        <p>{{ data.date_of_get_out|date:"Y/m/d" }}</p>
+                      </div>
+                      <div class="form-group">
+                        <label>الحمولة</label>
+                        <p>{{ data.load }}</p>
+                      </div>
+                      <div class="form-group">
+                        <label>اسم السائق</label>
+                        <p>{{ data.driver }}</p>
+                      </div>
+                      <div class="form-group">
+                        <label>تم الاضافة بواسطة</label>
+                        <p>{{ data.added_data }}</p>
+                      </div>
+                        {% if data.edited_data %}
+                          <div class="form-group">
+                            <label>تم التعديل بواسطة</label>
+                            <p>{{ data.edited_data }}</p>
+                          </div>
+                        {% endif %}
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+
+{% endblock context %}

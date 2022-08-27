@@ -1,0 +1,49 @@
+{% extends "shopping/base.html" %}
+
+{% load static %}
+
+{% block context%}
+    
+  <div class="main-panel">
+          <div class="content-wrapper" style="text-align: right;">
+            <div class="row">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card" style="background-color: #191c24;">
+                  {% if error %}
+                      <h4 class="text-danger" style="text-align-last: center;margin-top: 35px;">{{ error }}</h4>
+                  {% endif %}
+                  <div class="card-body">
+                    <h4 class="card-title">تعديل بيانات حموله</h4>
+                    <form class="forms-sample" action="{% url 'shopping:edit_load' pk %}" method="POST">
+                        {% csrf_token %}
+                      <div class="form-group">
+                          {{form.number.label}}
+                          {{form.number}}
+                      </div>
+                      <div class="form-group">
+                        {{form.load.label}}
+                        {{form.load}}
+                      </div>
+                      <div class="form-group">
+                        {{form.get_in.label}}
+                        {{form.get_in}}
+                      </div>
+                      <div class="form-group">
+                        {{form.get_out.label}}
+                        {{form.get_out}}
+                      </div>
+
+                      <div class="form-group">
+                        {{form.driver_name.label}}
+                        {{form.driver_name}}
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2" style="width: 25%;">تعديل</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+
+{% endblock %}

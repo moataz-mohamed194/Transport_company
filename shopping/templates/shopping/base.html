@@ -1,0 +1,79 @@
+{% extends "registration/base.html" %}
+{% load static %}
+    
+  {% block content%}
+  <div class="container-scroller">
+    <!-- partial:partials/_sidebar.html -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper" >
+  
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <ul class="navbar-nav navbar-nav-right" style="margin-left: auto;">
+              <li class="nav-item d-lg-block">
+                <a class="nav-link" href="{% url 'shopping:add_load'%}">
+                  اضافة عربة
+                </a>
+              </li>
+              <li class="nav-item nav-settings d-lg-block">
+                <a class="nav-link" href="{% url 'shopping:home'%}">
+                  بحث عن حمولة
+                </a>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <i class="mdi mdi-dots-vertical"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  {% if create_account %}
+                    <a class="dropdown-item preview-item" href="{% url 'accounts:signup' %}">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                          <i class="mdi mdi-account-plus"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <p class="preview-subject mb-1">انشاء حساب</p>
+                      </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                  {% endif %}
+                  <a class="dropdown-item preview-item" href="{% url 'registration:profile' %}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-account"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">الملف الشخصى</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item preview-item" href="{% url 'accounts:logout' %}">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">تسجيل الخروج</p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        {% block context%}
+      
+    {% endblock %}
+
+      </div>
+  </div>
+
+  {% endblock %}

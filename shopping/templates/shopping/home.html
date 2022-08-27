@@ -1,0 +1,134 @@
+{% extends "shopping/base.html" %}
+
+{% load static %}
+
+{% block context%}
+    
+  <div class="main-panel">
+          <div class="content-wrapper" style="text-align: right;">
+            <div class="row">
+              <form class="forms-sample" action="{% url 'shopping:home' %}" method="GET">
+            
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card" style="background-color: #191c24;">
+                  <div class="card-body">
+                    <h4 class="card-title">البحث</h4>
+                      {% csrf_token %}
+                      <div class="form-group">
+                          {{form.number.label}}
+                          {{form.number}}
+                      </div>
+                      <div class="form-group">
+                        {{form.load.label}}
+                        {{form.load}}
+                      </div>
+                      <div class="form-group">
+                        {{form.get_in.label}}
+                        {{form.get_in}}
+                      </div>
+                      <div class="form-group">
+                        {{form.get_out.label}}
+                        {{form.get_out}}
+                      </div>
+
+                      <div class="form-group">
+                        {{form.driver_name.label}}
+                        {{form.driver_name}}
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2" style="width: 25%;">بحث</button>
+                    
+                  </div>
+                </div>
+              </div>
+
+              {% if data%}
+                <div class="col-lg-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      </p>
+                      <div class="table-responsive" style="direction: rtl;">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>  المسلسل </th>
+                              <th>  رقم العربة </th>
+                              <th> الحمولة </th>
+                              <th> تاريخ الدخول </th>
+                              <th> تاريخ الخروج </th>
+                              <th> السائق </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for index in data %}
+                            <tr>
+                              <td class="py-1">
+                                {{ forloop.counter }}
+                              </td>
+                              <td class="py-1">
+                                <a href="{% url 'shopping:profile_of_load' index.id %}">
+                                  {{ index.number_of_car }}
+                                </a>
+                              </td>
+                              <td> 
+                                {{ index.load|truncatechars:45  }}
+                               </td>
+                               <td> 
+                                 {{ index.date_of_get_in|date:"Y/m/d" }}
+                                </td>
+                                <td>
+                                  {{ index.date_of_get_out|date:"Y/m/d" }}
+                                </td>
+                              <td> 
+                                {{ index.driver }}
+                               </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if data.paginator.num_pages %}
+                <div style="text-align: -webkit-center;">
+                  {% if data.has_next %}
+                    
+                    <input class="btn btn-success btn-fw"
+                            formaction="{% url 'shopping:home' data.next_page_number %}"
+                            type="submit" value="التالية">
+                  {% endif %}
+                  <span class="card-text">
+                    الصفحة {{ data.number|default:"0" }} من {{ data.paginator.num_pages|default:"0" }}
+                  </span>
+                  {% if data.has_previous %}
+                    <input class="btn btn-danger btn-fw"
+                            formaction="{% url 'shopping:home' data.previous_page_number %}"
+                            type="submit" value="السابقة">
+                  {% endif %}
+                </div>
+                
+                {% comment %} <div class="col-md-4 grid-margin stretch-card" style="justify-content: center;">
+                  <span class="card-text">
+                    الصفحة {{ data.number|default:"0" }} من {{ data.paginator.num_pages|default:"0" }}
+                  </span>
+                </div> {% endcomment %}
+
+                {% comment %} <div class="col-md-4 grid-margin stretch-card" style="justify-content: left;"> {% endcomment %}
+                  {% comment %} {% if data.has_previous %}
+                    <input class="btn btn-danger btn-fw"
+                            formaction="{% url 'shopping:home' data.previous_page_number %}"
+                            type="submit" value="السابقة">
+                  {% endif %} {% endcomment %}
+                {% comment %} </div> {% endcomment %}
+              
+              {% endif %}
+            </form>
+              
+        
+            </div>
+          </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORONA</title>
+    <link rel="stylesheet" href="{% static 'registration/assets/css/templatemo.css' %}">
+    <link href="{% static 'registration/assets/css/datepicker.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'registration/assets/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'registration/assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/assets/vendors/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'registration/assets/vendors/select2/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'registration/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css' %}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'registration/assets/css/style.css' %}">
+    <!-- End layout styles -->
+<!--    <link rel="shortcut icon" href="{% static 'registration/assets/images/favicon.png' %}" />-->
+    <link rel="stylesheet" href="{% static 'registration/assets/css/custom.css' %}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap' %}">
+    <link rel="stylesheet" href="{% static 'registration/assets/css/fontawesome.min.css' %}">
+
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            //display: none;
+            //-webkit-appearance: none;
+            width: 15px;
+            padding: 0px;
+            margin: 0px;
+            margin-top: 10px;
+        }
+        ::-webkit-calendar-picker-indicator{
+            margin-left: 0px;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+    {% block footer%}
+    {% endblock footer%}
+<!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'registration/assets/vendors/js/vendor.bundle.base.js'%}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'registration/assets/vendors/select2/select2.min.js'%}"></script>
+    <script src="{% static 'registration/assets/vendors/typeahead.js/typeahead.bundle.min.js'%}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'registration/assets/js/off-canvas.js'%}"></script>
+    <script src="{% static 'registration/assets/js/hoverable-collapse.js'%}"></script>
+    <script src="{% static 'registration/assets/js/misc.js'%}"></script>
+    <script src="{% static 'registration/assets/js/settings.js'%}"></script>
+    <script src="{% static 'registration/assets/js/todolist.js'%}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'registration/assets/js/file-upload.js'%}"></script>
+    <script src="{% static 'registration/assets/js/typeahead.js'%}"></script>
+    <script src="{% static 'registration/assets/js/select2.js'%}"></script>
+    
+    <!-- Start Script -->
+    <script src="{% static 'registration/assets/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'registration/assets/js/templatemo.js' %}"></script>
+    <script src="{% static 'registration/assets/js/custom.js' %}"></script>
+    <script src="{% static 'registration/assets/js/datepicker.js' %}"></script>
+    <script src="{% static 'registration/assets/js/calender.js' %}"></script>
+
+</body>
+</html>

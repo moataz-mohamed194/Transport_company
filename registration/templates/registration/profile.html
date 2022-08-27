@@ -1,0 +1,16 @@
+{% extends "shopping/base.html" %}
+
+{% load static %}
+
+{% block context%}
+    
+  <div class="main-panel">
+          <div class="content-wrapper" style="text-align: right;">
+            <div style="text-align-last: center;">
+              <i class="mdi mdi-account-circle" style="font-size: 8em;"></i>
+                <p style="font-size: 50px !important;">{{ user }}</p>
+            </div>
+          </div>
+        </div>
+
+{% endblock %}
