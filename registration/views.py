@@ -2,32 +2,46 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import Group, User
+from django.utils.decorators import method_decorator
+from django.views import View
+
 from registration.form import *
 from django.contrib.auth import logout, login
 
 from shopping.views import show_add_account
 
 
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(data=request.POST)
+class UserLogin(View):
+    template_name = 'registration/login.html'
+    form_class = LoginForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, context={'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            data_login = form.cleaned_data
-            username = str(data_login['username'])
-            password = str(data_login['password'])
-            user = auth.authenticate(request, username=username, password=password)
-            login(request, user)
-            return redirect('shopping:home')
-        else:
-            return redirect('error:error_page', 'check your data')
-    else:
-        form = LoginForm()
-    return render(request, 'registration/login.html', {'form': form})
+            user = auth.authenticate(
+                username=str(form.cleaned_data['username']),
+                password=str(form.cleaned_data['password']),
+            )
+            if user is not None:
+                login(request, user)
+                return redirect('shopping:home')
+        return redirect('error:error_page', 'check your data')
 
 
-def create_user(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
+class CreateUser(View):
+    template_name = 'registration/signup.html'
+    form_class = SignUpForm
+
+    def get(self, request):
+        form = self.form_class()
+        return render(request, self.template_name, context={'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
         if form.is_valid():
             if form.cleaned_data['password'] == form.cleaned_data['repeatPassword']:
                 if User.objects.filter(username=form.cleaned_data['userName']).count() < 1:
@@ -45,20 +59,24 @@ def create_user(request):
                 return redirect('error:error_page', 'كلمة السر غير متطابقين')
         else:
             return redirect('error:error_page', 'تاكد من البيانات المدخلة')
-    else:
-        form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
 
 
-def user_logout(request):
-    logout(request)
-    return redirect('registration:login')
+class UserLogOut(View):
+    template_name = 'registration:login'
+
+    def dispatch(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('registration:login')
 
 
-@login_required(login_url='/accounts/login/')
-def profile(request):
-    context = {
-        'user': request.user.first_name,
-        'create_account': show_add_account(request)
-    }
-    return render(request, 'registration/profile.html', context)
+class Profile(View):
+    template_name = 'registration/profile.html'
+    login_required = True
+
+    def get(self, request):
+        print(request.user)
+        context = {
+            'user': self.request.user.first_name,
+            'create_account': show_add_account(self.request)
+        }
+        return render(request, 'registration/profile.html', context)

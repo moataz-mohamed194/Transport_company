@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from django.views import View
 
 
-def error_page(request, message):
-    return render(request, 'error/error.html', {'message': message})
+class ErrorPage(View):
+    template_name = 'error/error.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        message = self.kwargs['message']
+        return render(request, self.template_name, {'message': message})
